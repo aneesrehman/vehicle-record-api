@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "build-ts": "./build-ts.sh"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.109",
+    "@types/node": "^18.11.17",
+    "@types/uuid": "^9.0.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.236.0",
+    "@aws-sdk/util-dynamodb": "^3.236.0",
+    "moment": "^2.29.4",
+    "uuid": "^9.0.0"
+  }
+}

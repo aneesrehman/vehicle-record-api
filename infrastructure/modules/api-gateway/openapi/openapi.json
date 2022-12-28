@@ -1,0 +1,290 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Vehicle Record Management API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/vehicle": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/vehicleModel"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "uri": "${get_vehicles_uri}",
+          "responses": {
+            "default": {
+              "statusCode": "200",
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createVehicleModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "items": {
+                        "$ref": "#/components/schemas/vehicleModel"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "uri": "${create_vehicle_uri}",
+          "responses": {
+            "default": {
+              "statusCode": "200",
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/vehicle/{vehicleId}": {
+      "put": {
+        "parameters": [
+          {
+            "name": "vehicleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createVehicleModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/vehicleModel"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "uri": "${update_vehicle_uri}",
+          "responses": {
+            "default": {
+              "statusCode": "200",
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "vehicleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "uri": "${delete_vehicle_uri}",
+          "responses": {
+            "default": {
+              "statusCode": "200",
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "vehicleModel": {
+        "type": "object",
+        "description": "Vehicle Object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Vehicle UUID"
+          },
+          "make": {
+            "type": "string",
+            "description": "Make of the vehicle"
+          },
+          "model": {
+            "type": "string",
+            "description": "Model of the vehicle"
+          },
+          "reg": {
+            "type": "string",
+            "description": "Registration Number of the vehicle"
+          },
+          "registrationDate": {
+            "type": "string",
+            "description": "Registration date of the vehicle"
+          }
+        }
+      },
+      "createVehicleModel": {
+        "type": "object",
+        "description": "Vehicle Object",
+        "required": [
+          "make", "model", "reg", "registrationDate"
+        ],
+        "properties": {
+          "make": {
+            "type": "string",
+            "description": "Make of the vehicle"
+          },
+          "model": {
+            "type": "string",
+            "description": "Model of the vehicle"
+          },
+          "reg": {
+            "type": "string",
+            "description": "Registration Number of the vehicle"
+          },
+          "registrationDate": {
+            "type": "string",
+            "description": "Registration date of the vehicle"
+          }
+        }
+      }
+    }
+  }
+}
