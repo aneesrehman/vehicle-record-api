@@ -31,5 +31,3 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent | any): Promise<
     return Utility.constructResponse(false, 'Failed to fetch vehicle records', ResponseCode.INTERNAL_SERVER_ERROR, {});
   }
 }
-
-lambdaHandler({});
