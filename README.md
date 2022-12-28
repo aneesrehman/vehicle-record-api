@@ -1,6 +1,6 @@
-# code-task-clickdealer
+# vehicle-record-api
 
-This repository contains the code of the code-task for ClickDealer
+This repository contains the code of the vehicle-record-api
 
 ## Setup and Provisioning
 
